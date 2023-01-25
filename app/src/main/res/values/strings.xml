@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">InventoryApp</string>
+    <string name="txtLoginButton">Login Now</string>
+    <string name="hintUserName">User Name</string>
+    <string name="hintPassword">Password</string>
+    <string name="txtLogo">Inventory</string>
+</resources>

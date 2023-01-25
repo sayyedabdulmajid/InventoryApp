@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="RedDark_JazzberryJam">#AF0759</color>
+    <color name="RedLight_Rouge">#BF2969</color>
+    <color name="GreenDark_Christi">#6FA626</color>
+    <color name="GreenLight_Celery">#A6BE45</color>
+    <color name="BlueDark_Cerulean">#0077B9</color>
+    <color name="BlueLight_Malibu">#5CB7E3</color>
+
+
+    <color name="login_form_details">#ccffffff</color>
+    <color name="login_form_details_medium">#66ffffff</color>
+    <color name="login_form_details_light">#1affffff</color>
+
+    <color name="colorWhite">#ffffff</color>
+
+    <color name="colorBlack">#000000</color>
+
+    <color name="colorGray">#cccccc</color>
+    <color name="colorDarkGray">#FFCDD2</color>
+    <color name="colorGrayLight">#eeeeee</color>
+    <color name="colorBlue">#6f99ff</color>
+    <color name="colorYellow">#FFD54F</color>
+    <color name="evenBGRowColor">#D3D3D3</color>
+    <color name="oddBGRowColor">#F3F3F3</color>
+    <color name="evenRowtextColor">#D3D3D3</color>
+    <color name="oddRowtextColor">#F3F3F3</color>
+    <color name="Godrej_Green">#5FB233</color>
+    <color name="Godrej_Blue">#4187CE</color>
+    <color name="Godrej_Violet">#BD1362</color>
+
+</resources>
