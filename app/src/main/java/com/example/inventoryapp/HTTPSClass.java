@@ -84,7 +84,7 @@ public class HTTPSClass {
     }
 
 
-    public void postData(String url, Map<String, String> params) throws IOException {
+    public String postData(String url, Map<String, String> params) throws IOException {
         HttpsURLConnection conn = setUpHttpsConnection(url);
         StringBuilder postData = new StringBuilder();
         for (Map.Entry<String, String> param : params.entrySet()) {
@@ -106,14 +106,15 @@ public class HTTPSClass {
         out.write(postDataBytes);
         out.flush();
         out.close();
-
+        String response=null;
         int responseCode = conn.getResponseCode();
         if (responseCode == HttpsURLConnection.HTTP_OK) {
-            String response = readStream(conn.getInputStream());
+            response = readStream(conn.getInputStream());
             Log.e("postData:", response);
         } else {
             Log.e("postData:" , conn.getResponseMessage());
         }
+        return response;
     }
 
     public String getData(String url) throws IOException {

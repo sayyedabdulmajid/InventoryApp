@@ -4,4 +4,11 @@
     <string name="hintUserName">User Name</string>
     <string name="hintPassword">Password</string>
     <string name="txtLogo">Inventory</string>
+    <string name="UserVerifyLink">https://172.30.54.85/Users/AppVerify</string>
+    <string name="StartActLetsGetStarted">Let\'s get Started</string>
+    <string name="MenuActOutboundBtnTxt">OutBound</string>
+    <string name="MenuActInboundBtnTxt">InBound</string>
+    <string name="MenuActCenterDisplayTxt">Choose The Activity To be Performed</string>
+    <string name="MenuActGenReportBtnTxt">Generate Report</string>
+    <string name="MenuActUserNameTxt">TextView</string>
 </resources>
