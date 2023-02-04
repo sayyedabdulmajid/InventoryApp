@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:autofillHints="27-06-2001"
+    android:paddingStart="15sp"
+    android:paddingEnd="15sp"
+    tools:context=".Activity.InboundActivity">
+
+    <Button
+        android:id="@+id/IUpdateInboundBtn"
+        android:layout_width="230dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/btn_bg"
+        android:text="Update Inbound"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IRemarkLabel"
+        app:layout_constraintVertical_bias="0.64" />
+
+    <EditText
+        android:id="@+id/IRequisitionNumEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:text="Req1"
+        android:inputType="textPersonName"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/IRequisationNLabel"
+        app:layout_constraintEnd_toEndOf="@+id/INewStockEditTxt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/INewStockEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/IRequisationNLabel" />
+
+    <EditText
+        android:id="@+id/ISupplierEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:text="Supplier1"
+        android:inputType="textPersonName"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ISupplierLabel"
+        app:layout_constraintEnd_toEndOf="@+id/IRequisitionNumEditTxt"
+        app:layout_constraintStart_toStartOf="@+id/IRequisitionNumEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/ISupplierLabel" />
+
+    <EditText
+        android:id="@+id/IItemCodeEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="none"
+        android:paddingTop="10sp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/IItemCodeLabel"
+        app:layout_constraintStart_toEndOf="@+id/IInvoiceNumberLabel"
+        app:layout_constraintTop_toTopOf="@+id/IItemCodeLabel" />
+
+    <EditText
+        android:id="@+id/IInboundOrderEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:text="InboundOrder1"
+        android:inputType="textPersonName"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/IInboundOrderLabel"
+        app:layout_constraintEnd_toEndOf="@+id/IInvoiceNumberEditTxt"
+        app:layout_constraintStart_toStartOf="@+id/IInvoiceNumberEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/IInboundOrderLabel" />
+
+    <TextView
+        android:id="@+id/IRemarkLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="Remark"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/ISupplierLabel"
+        app:layout_constraintTop_toBottomOf="@+id/ISupplierLabel" />
+
+    <TextView
+        android:id="@+id/IDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginStart="250dp"
+        android:text="Date"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/IItemCodeEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/IItemCodeEditTxt" />
+
+    <TextView
+        android:id="@+id/ISupplierLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Supplier"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/IRequisationNLabel"
+        app:layout_constraintTop_toBottomOf="@+id/IRequisationNLabel" />
+
+    <TextView
+        android:id="@+id/IRequisationNLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Requisation Number"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/INewStockLabel"
+        app:layout_constraintTop_toBottomOf="@+id/INewStockLabel" />
+
+    <TextView
+        android:id="@+id/INewStockLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="New Stock"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/UnitLabel"
+        app:layout_constraintTop_toBottomOf="@+id/UnitLabel" />
+
+    <TextView
+        android:id="@+id/IDescriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Descriptions"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/IDateLabel"
+        app:layout_constraintTop_toBottomOf="@+id/IDateLabel" />
+
+    <TextView
+        android:id="@+id/UnitLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Unit"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/IDescriptionLabel"
+        app:layout_constraintTop_toBottomOf="@+id/IDescriptionLabel" />
+
+    <TextView
+        android:id="@+id/IInboundOrderLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Inbound Order"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/IInvoiceNumberLabel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/IInvoiceNumberLabel"
+        app:layout_constraintTop_toBottomOf="@+id/IInvoiceNumberLabel" />
+
+    <TextView
+        android:id="@+id/IHeaderLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/InboundActHeadingTxt"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/IItemCodeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="80dp"
+        android:text="ItemCode "
+        android:textAlignment="textEnd"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/IHeaderLabel"
+        app:layout_constraintTop_toBottomOf="@+id/IHeaderLabel" />
+
+    <TextView
+        android:id="@+id/IInboundQtyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Inbound Qty"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/IItemCodeLabel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/IItemCodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/IItemCodeLabel" />
+
+    <TextView
+        android:id="@+id/ICurrentStockLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Current Stock"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/IInboundQtyLabel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/IInboundQtyLabel"
+        app:layout_constraintTop_toBottomOf="@+id/IInboundQtyLabel" />
+
+    <TextView
+        android:id="@+id/ITotalPriceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Total Price"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/ICurrentStockLabel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/ICurrentStockLabel"
+        app:layout_constraintTop_toBottomOf="@+id/ICurrentStockLabel" />
+
+    <TextView
+        android:id="@+id/IIndenterLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Indentor"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/ITotalPriceLabel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/ITotalPriceLabel"
+        app:layout_constraintTop_toBottomOf="@+id/ITotalPriceLabel" />
+
+    <TextView
+        android:id="@+id/IInvoiceNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Invoice Number"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/IIndenterLabel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/IIndenterLabel"
+        app:layout_constraintTop_toBottomOf="@+id/IIndenterLabel" />
+
+    <EditText
+        android:id="@+id/IInvoiceNumberEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="InvocieNumber1"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/IInvoiceNumberLabel"
+        app:layout_constraintEnd_toEndOf="@+id/ISpinnerIndenter"
+        app:layout_constraintStart_toStartOf="@+id/ISpinnerIndenter"
+        app:layout_constraintTop_toTopOf="@+id/IInvoiceNumberLabel" />
+
+    <EditText
+        android:id="@+id/IUnitEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:inputType="none"
+        android:enabled="false"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/UnitLabel"
+        app:layout_constraintEnd_toEndOf="@+id/IDescriptionEditTxt"
+        app:layout_constraintStart_toStartOf="@+id/IDescriptionEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/UnitLabel" />
+
+    <EditText
+        android:id="@+id/IDescriptionEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:inputType="none"
+        android:enabled="false"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/IDescriptionLabel"
+        app:layout_constraintEnd_toEndOf="@+id/IDatePickerInboundDate"
+        app:layout_constraintStart_toStartOf="@+id/IDatePickerInboundDate"
+        app:layout_constraintTop_toTopOf="@+id/IDescriptionLabel"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/ICurrentStockEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:inputType="none"
+        android:enabled="false"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ICurrentStockLabel"
+        app:layout_constraintEnd_toEndOf="@+id/IInboundQtyEditText"
+        app:layout_constraintStart_toStartOf="@+id/IInboundQtyEditText"
+        app:layout_constraintTop_toTopOf="@+id/ICurrentStockLabel" />
+
+    <EditText
+        android:id="@+id/IInboundQtyEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:hint="0.00"
+        android:text="20.0"
+        android:inputType="numberDecimal"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/IInboundQtyLabel"
+        app:layout_constraintEnd_toEndOf="@+id/IItemCodeEditTxt"
+        app:layout_constraintStart_toStartOf="@+id/IItemCodeEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/IInboundQtyLabel" />
+
+    <EditText
+        android:id="@+id/ITotalPriceEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:hint="0.00"
+        android:inputType="none"
+        android:enabled="false"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ITotalPriceLabel"
+        app:layout_constraintEnd_toEndOf="@+id/ICurrentStockEditTxt"
+        app:layout_constraintStart_toStartOf="@+id/ICurrentStockEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/ITotalPriceLabel" />
+
+    <EditText
+        android:id="@+id/INewStockEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:hint="0.00"
+        android:inputType="none"
+        android:enabled="false"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/INewStockLabel"
+        app:layout_constraintEnd_toEndOf="@+id/IUnitEditTxt"
+        app:layout_constraintStart_toStartOf="@+id/IUnitEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/INewStockLabel" />
+
+    <EditText
+        android:id="@+id/IRemarkMultiEditTxt"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@drawable/search_bar_bg"
+        android:ems="10"
+        android:text="remark1"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:paddingStart="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/ISupplierEditTxt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/ISupplierEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/IRemarkLabel" />
+
+
+    <Spinner
+        android:id="@+id/ISpinnerIndenter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/IIndenterLabel"
+        app:layout_constraintEnd_toEndOf="@+id/ITotalPriceEditTxt"
+        app:layout_constraintStart_toStartOf="@+id/ITotalPriceEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/IIndenterLabel" />
+
+    <AutoCompleteTextView
+        android:id="@+id/SearchBoxAutoTxtView2"
+        android:layout_width="545dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/search_bar_bg"
+        android:drawablePadding="-200dp"
+        android:ems="10"
+        android:hint="@string/InboundActSearchBoxHint"
+        android:inputType="textPersonName"
+        android:paddingStart="15sp"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/IHeaderLabel"
+        app:layout_constraintTop_toTopOf="@+id/IHeaderLabel" />
+
+    <AutoCompleteTextView
+        android:id="@+id/ISearchBoxAutoTxtView"
+        android:layout_width="545dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/search_bar_bg"
+        android:drawablePadding="-200dp"
+        android:ems="10"
+        android:hint="@string/InboundActSearchBoxHint"
+        android:inputType="textPersonName"
+        android:paddingStart="15sp"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/IHeaderLabel"
+        app:layout_constraintTop_toTopOf="@+id/IHeaderLabel" />
+
+    <Button
+        android:id="@+id/IDatePickerInboundDate"
+        style="?android:spinnerStyle"
+        android:layout_width="206dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/input_bg"
+        android:drawableEnd="@drawable/date"
+        android:onClick="openDatePicker"
+        android:paddingStart="15sp"
+        android:paddingEnd="15sp"
+        android:text="Date"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/IDateLabel"
+        app:layout_constraintStart_toEndOf="@+id/IRequisationNLabel" />
+
+    <ImageButton
+        android:id="@+id/IImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/IHeaderLabel"
+        app:layout_constraintTop_toTopOf="@+id/IHeaderLabel"
+        app:srcCompat="@drawable/arrow_full" />
+
+    <Button
+        android:id="@+id/IInboundScanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:drawableEnd="@drawable/qrscanner"
+        android:drawablePadding="10sp"
+        android:paddingStart="15sp"
+        android:paddingEnd="15sp"
+        android:text="Scan QR Code"
+        app:layout_constraintBottom_toBottomOf="@+id/ISearchBoxAutoTxtView"
+        app:layout_constraintStart_toEndOf="@+id/ISearchBoxAutoTxtView"
+        app:layout_constraintTop_toTopOf="@+id/ISearchBoxAutoTxtView"
+        app:layout_constraintVertical_bias="0.461" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

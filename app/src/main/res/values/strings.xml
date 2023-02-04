@@ -11,4 +11,15 @@
     <string name="MenuActCenterDisplayTxt">Choose The Activity To be Performed</string>
     <string name="MenuActGenReportBtnTxt">Generate Report</string>
     <string name="MenuActUserNameTxt">TextView</string>
+    <string name="MenuActArrowTxt">Back</string>
+    <string name="InboundActHeadingTxt">Inbound</string>
+    <string name="InboundActSearchBoxHint">Enter the Item Code or scan</string>
+    <string-array name="Indentor">
+        <item>Tejas Shirgaonkar</item>
+        <item>Majeed</item>
+        <item>Bhuvan</item>
+        <item>Faisal</item>
+    </string-array>
+    <string name="UserIndentorListLink">https://172.30.54.85/Users/getIndentorList</string>
+
 </resources>

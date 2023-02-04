@@ -1,9 +1,34 @@
 package com.example.inventoryapp.Item;
 
+import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.example.inventoryapp.Activity.InboundActivity;
+import com.example.inventoryapp.HTTPSClass;
+import com.example.inventoryapp.Inbound.Inbound;
+import com.example.inventoryapp.Unit.Unit;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
+
 import net.sourceforge.jtds.jdbc.DateTime;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Item {
     public  static final String TableName = "Items";
@@ -123,18 +148,18 @@ public class Item {
     public static class Column_Name {
         public static final String ItemCode = "ItemCode";
         public static final String ShortDescription = "ShortDescription";
-        public static final String LongDescription = "ShortDescription";
-        public static final String Location = "ShortDescription";
-        public static final String CreatedOn = "ShortDescription";
-        public static final String UpdatedOn = "ShortDescription";
-        public static final String CreatedBy = "ShortDescription";
-        public static final String UpdatedBy = "ShortDescription";
-        public static final String AvailableStock = "ShortDescription";
-        public static final String ReOrderLevel = "ShortDescription";
-        public static final String MinStockLevel = "ShortDescription";
-        public static final String UnitId = "ShortDescription";
-        public static final String Price = "ShortDescription";
-        public static final String Disable = "ShortDescription";
+        public static final String LongDescription = "LongDescription";
+        public static final String Location = "Location";
+        public static final String CreatedOn = "CreatedOn";
+        public static final String UpdatedOn = "UpdatedOn";
+        public static final String CreatedBy = "CreatedBy";
+        public static final String UpdatedBy = "UpdatedBy";
+        public static final String AvailableStock = "AvailableStock";
+        public static final String ReOrderLevel = "ReOrderLevel";
+        public static final String MinStockLevel = "MinStockLevel";
+        public static final String UnitId = "UnitId";
+        public static final String Price = "Price";
+        public static final String Disable = "Disable";
     }
     private String ItemCode;
     private String ShortDescription;
@@ -148,6 +173,104 @@ public class Item {
     private BigDecimal ReOrderLevel;
     private BigDecimal MinStockLevel;
     private int UnitId;
+    private Unit unit;
     private BigDecimal Price;
     private boolean Disable;
+
+    public static Item fromJson(JSONObject jsonObject) throws JSONException {
+        Item item = new Item();
+        item.setItemCode( jsonObject.getString(Item.Column_Name.ItemCode) );
+        item.setShortDescription( jsonObject.getString(Item.Column_Name.ShortDescription) );
+        item.setLongDescription( jsonObject.getString(Item.Column_Name.LongDescription) );
+        item.setLocation( jsonObject.getString(Item.Column_Name.Location) );
+        //Here Timestamp received from Https is "CreatedOn": "/Date(1675508709323)/",
+        item.setCreatedOn(parseTimestamp(jsonObject.getString(Item.Column_Name.CreatedOn)));
+        item.setUpdatedOn(parseTimestamp(jsonObject.getString(Item.Column_Name.UpdatedOn)));//Timestamp.valueOf(jsonObject.getString(Item.Column_Name.UpdatedOn))
+        item.setCreatedBy( jsonObject.getString(Item.Column_Name.CreatedBy) );
+        item.setUpdatedBy( jsonObject.getString(Item.Column_Name.UpdatedBy) );
+        item.setAvailableStock(new BigDecimal(jsonObject.getString(Item.Column_Name.AvailableStock)));
+        item.setReOrderLevel(new BigDecimal(jsonObject.getString(Item.Column_Name.ReOrderLevel)));
+        item.setMinStockLevel(new BigDecimal(jsonObject.getString(Item.Column_Name.MinStockLevel)));
+        item.setUnitId( jsonObject.getInt(Item.Column_Name.UnitId) );
+        item.setPrice(new BigDecimal(jsonObject.getString(Item.Column_Name.Price)));
+        item.setDisable( jsonObject.getBoolean(Item.Column_Name.Disable) );
+        return item;
+    }
+
+    //Here Timestamp received from Https is "CreatedOn": "/Date(1675508709323)/",
+    // to convert to TimestampObject
+    // remove the /Date(...) part of the string and parse the remaining value as a long,
+    // which represents the number of milliseconds since the Unix epoch.
+    // The resulting value is then used to construct a Date object
+    private static Timestamp parseTimestamp(String value) {
+        if (value == null || value.isEmpty()) {
+            return null;
+        }
+
+        try {
+            int startIndex = value.indexOf("(") + 1;
+            int endIndex = value.indexOf(")");
+            String timestampValue = value.substring(startIndex, endIndex);
+            long timeInMilliseconds = Long.parseLong(timestampValue);
+            return new Timestamp(timeInMilliseconds);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static String fromObjToJsonStr(Item item)
+    {
+        Gson gson = new Gson();
+        String itemJsonStr = gson.toJson(item);
+        return itemJsonStr;
+    }
+
+    public static Item fromJsonStrToObj(String JsonStr)
+    {
+        Gson gson = new GsonBuilder().registerTypeAdapter(Timestamp.class, new Item.DotNetDateDeserializer()).create();
+        Item item = gson.fromJson(JsonStr, Item.class);
+        return  item;
+    }
+
+    private static class DotNetDateDeserializer implements JsonDeserializer<Timestamp> {
+        @Override
+        public Timestamp deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            String dateString = jsonElement.getAsString();
+            dateString = dateString.replace("/Date(", "").replace(")/", "");
+            long milliseconds = Long.parseLong(dateString);
+            return new Timestamp(milliseconds);
+        }
+    }
+    public static Map<String, String> classToMap(Object object) {
+        Map<String, String> map = new HashMap<>();
+        for (Field field : object.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            try {
+                map.put(field.getName(), field.get(object).toString());
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return map;
+    }
+
 }
+
+
+
+
+
+//
+//    String jsonString = "{\"timestamp\":\"2022-12-01 12:00:00\",\"datetime\":\"2022-12-01\",\"bigdecimal\":\"12345.6789\"}";
+//
+//    JSONObject jsonObject = new JSONObject(jsonString);
+//    Timestamp timestamp = Timestamp.valueOf(jsonObject.getString("timestamp"));
+//    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//    java.util.Date parsedDate = dateFormat.parse(jsonObject.getString("datetime"));
+//    java.sql.Date datetime = new java.sql.Date(parsedDate.getTime());
+//    BigDecimal bigdecimal = new BigDecimal(jsonObject.getString("bigdecimal"));
+//
+//    System.out.println("Timestamp: " + timestamp);
+//            System.out.println("Datetime: " + datetime);
+//            System.out.println("BigDecimal: " + bigdecimal);
+//            }

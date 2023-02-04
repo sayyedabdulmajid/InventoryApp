@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="15sp"
+    tools:context=".Activity.OutboundActivity">
+
+    <Button
+        android:id="@+id/UpdateOutboundBtn"
+        android:layout_width="230dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/btn_bg"
+        android:text="Update Outbound "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.914" />
+
+    <TextView
+        android:id="@+id/OOutboundHeaderDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="80dp"
+        android:text="Outbound"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/OItemCodeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="150dp"
+        android:text="ItemCode"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/OOutboundHeaderDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/OOutboundHeaderDisplay" />
+
+    <TextView
+        android:id="@+id/OCurrentStockLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="Current Stock"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/ODescriptionLabel"
+        app:layout_constraintTop_toBottomOf="@+id/ODescriptionLabel" />
+
+    <TextView
+        android:id="@+id/OOutboundDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginStart="250dp"
+        android:text="Outbound date"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/OItemCodeEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/OItemCodeLabel" />
+
+    <TextView
+        android:id="@+id/OOutboundOrderLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="Outbound order"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/OCurrentStockLabel"
+        app:layout_constraintTop_toBottomOf="@+id/OCurrentStockLabel" />
+
+    <TextView
+        android:id="@+id/OTotalValueLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="Total Value"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/OPricePerUnitLabel"
+        app:layout_constraintTop_toBottomOf="@+id/OPricePerUnitLabel" />
+
+    <TextView
+        android:id="@+id/OPricePerUnitLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="Price per unit"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/OQtyLabel"
+        app:layout_constraintTop_toBottomOf="@+id/OQtyLabel" />
+
+    <TextView
+        android:id="@+id/OQtyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="Qty"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/OItemCodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/OItemCodeLabel" />
+
+    <TextView
+        android:id="@+id/ODescriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="Description"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/OOutboundDateLabel"
+        app:layout_constraintTop_toBottomOf="@+id/OOutboundDateLabel" />
+
+    <EditText
+        android:id="@+id/OItemCodeEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="none"
+        android:paddingTop="10sp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/OItemCodeLabel"
+        app:layout_constraintStart_toEndOf="@+id/OPricePerUnitLabel"
+        app:layout_constraintTop_toTopOf="@+id/OItemCodeLabel"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/OOutboundOrderEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/OOutboundOrderLabel"
+        app:layout_constraintStart_toStartOf="@+id/OCurrentStockEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/OOutboundOrderLabel" />
+
+    <EditText
+        android:id="@+id/OCurrentStockEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:inputType="none"
+        android:enabled="false"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/OCurrentStockLabel"
+        app:layout_constraintEnd_toEndOf="@+id/ODescriptionEditTxt"
+        app:layout_constraintStart_toStartOf="@+id/ODescriptionEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/OCurrentStockLabel" />
+
+    <EditText
+        android:id="@+id/OTotalValueEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:hint="0.00"
+        android:inputType="none"
+        android:enabled="false"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/OTotalValueLabel"
+        app:layout_constraintStart_toStartOf="@+id/PricePerUnitEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/OTotalValueLabel" />
+
+    <EditText
+        android:id="@+id/PricePerUnitEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:hint="0.00"
+        android:inputType="none"
+        android:enabled="false"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/OPricePerUnitLabel"
+        app:layout_constraintStart_toStartOf="@+id/OQtyEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/OPricePerUnitLabel" />
+
+    <EditText
+        android:id="@+id/OQtyEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:hint="0.00"
+        android:inputType="numberDecimal"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/OQtyLabel"
+        app:layout_constraintStart_toStartOf="@+id/OItemCodeEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/OQtyLabel" />
+
+    <EditText
+        android:id="@+id/ODescriptionEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="none"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ODescriptionLabel"
+        app:layout_constraintEnd_toEndOf="@+id/datePickerOutboundDate"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/datePickerOutboundDate"
+        app:layout_constraintTop_toTopOf="@+id/ODescriptionLabel"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <AutoCompleteTextView
+        android:id="@+id/SearchBoxAutoTxtV"
+        android:layout_width="545dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/search_bar_bg"
+        android:ems="10"
+        android:hint="Enter the Item Code or scan"
+        android:inputType="textPersonName"
+        android:paddingStart="15sp"
+        app:layout_constraintStart_toEndOf="@+id/OOutboundHeaderDisplay"
+        app:layout_constraintTop_toTopOf="@+id/OOutboundHeaderDisplay" />
+
+    <Button
+        android:id="@+id/datePickerOutboundDate"
+        style="?android:spinnerStyle"
+        android:layout_width="206dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/input_bg"
+        android:drawableEnd="@drawable/date"
+        android:hint="Date"
+        android:onClick="openDatePicker"
+        android:paddingStart="15sp"
+        android:paddingEnd="15sp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/OOutboundDateLabel"
+        app:layout_constraintStart_toEndOf="@+id/OOutboundOrderLabel"
+        app:layout_constraintTop_toTopOf="@+id/OOutboundDateLabel" />
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/OOutboundHeaderDisplay"
+        app:layout_constraintTop_toTopOf="@+id/OOutboundHeaderDisplay"
+        app:srcCompat="@drawable/arrow_full" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:drawableEnd="@drawable/qrscanner"
+        android:drawablePadding="10sp"
+        android:paddingStart="15sp"
+        android:paddingEnd="15sp"
+        android:text="Scan QR code"
+        app:layout_constraintBottom_toBottomOf="@+id/SearchBoxAutoTxtV"
+        app:layout_constraintStart_toEndOf="@+id/SearchBoxAutoTxtV"
+        app:layout_constraintTop_toTopOf="@+id/SearchBoxAutoTxtV"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/ORemarkLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="Remark"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/OTotalValueLabel"
+        app:layout_constraintTop_toBottomOf="@+id/OTotalValueLabel" />
+
+    <EditText
+        android:id="@+id/ORemarkMultiEditTxt"
+        android:layout_width="206dp"
+        android:layout_height="76dp"
+        android:background="@drawable/search_bar_bg"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:paddingStart="15sp"
+        android:paddingEnd="15sp"
+        app:layout_constraintStart_toStartOf="@+id/OTotalValueEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/ORemarkLabel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

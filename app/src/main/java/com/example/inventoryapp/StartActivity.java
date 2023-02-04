@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.inventoryapp.Activity.InboundActivity;
 import com.example.inventoryapp.Activity.LoginActivity;
 
 public class StartActivity extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class StartActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(StartActivity.this, LoginActivity.class));
+                startActivity(new Intent(StartActivity.this, InboundActivity.class));
             }
         });
     }
