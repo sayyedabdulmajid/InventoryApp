@@ -4,19 +4,26 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.KeyStore;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
@@ -24,6 +31,8 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManagerFactory;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class HTTPSClass {
 //    private static final String CERT_FILE = "servercrt.crt";
@@ -52,7 +61,7 @@ public class HTTPSClass {
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
             InputStream caInput = new BufferedInputStream(context.getResources().openRawResource(R.raw.servercrt));
             Certificate ca = cf.generateCertificate(caInput);
-            System.out.println("ca=" + ((X509Certificate) ca).getSubjectDN());
+            //System.out.println("ca=" + ((X509Certificate) ca).getSubjectDN());
 
             // Create a KeyStore containing our trusted CAs
             String keyStoreType = KeyStore.getDefaultType();
@@ -116,6 +125,114 @@ public class HTTPSClass {
         }
         return response;
     }
+
+
+    public String postData(String url) throws IOException {
+
+        HttpsURLConnection conn = setUpHttpsConnection(url);
+        conn.setDoInput(true);
+        conn.setDoOutput(true);
+        conn.setRequestMethod("POST");
+        //conn.setChunkedStreamingMode(0);
+        conn.setHostnameVerifier(hostnameVerifier);
+
+        OutputStream out = new BufferedOutputStream(conn.getOutputStream());
+        out.write(URLEncoder.encode("", "UTF-8").getBytes());
+        out.flush();
+        out.close();
+        String response=null;
+        int responseCode = conn.getResponseCode();
+        if (responseCode == HttpsURLConnection.HTTP_OK) {
+            response = readStream(conn.getInputStream());
+            Log.e("postData:", response);
+        } else {
+            Log.e("postData:" , conn.getResponseMessage());
+        }
+        return response;
+    }
+
+    public String postData(String url, String JsonObjString) throws IOException, JSONException {
+//        HttpsURLConnection conn = setUpHttpsConnection(url);
+//        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), JsonObjString);
+//
+//        conn.setDoInput(true);
+//        conn.setDoOutput(true);
+//        conn.setRequestMethod("POST");
+//        //conn.setChunkedStreamingMode(0);
+//        conn.setHostnameVerifier(hostnameVerifier);
+//
+//        OutputStream out = new BufferedOutputStream(conn.getOutputStream());
+//        out.write(body.toString().getBytes());
+//        out.flush();
+//        out.close();
+//        String response=null;
+//        int responseCode = conn.getResponseCode();
+//        if (responseCode == HttpsURLConnection.HTTP_OK) {
+//            response = readStream(conn.getInputStream());
+//            Log.e("postData:", response);
+//        } else {
+//            Log.e("postData:" , conn.getResponseMessage());
+//        }
+//        return response;
+        HttpsURLConnection conn = setUpHttpsConnection(url);
+        //RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), JsonObjString);
+
+        JSONObject jsonObject = new JSONObject(JsonObjString);
+
+        conn.setDoOutput(true);
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Accept", "application/json");
+        //conn.setFixedLengthStreamingMode(JsonObjString.getBytes().length);
+        conn.setHostnameVerifier(hostnameVerifier);
+
+
+        DataOutputStream outputStream = new DataOutputStream(conn.getOutputStream());
+        outputStream.writeBytes(jsonObject.toString());
+        outputStream.flush();
+        outputStream.close();
+
+//
+//        OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+//        out.write(JsonObjString);
+//        out.flush();
+//        out.close();
+        String response=null;
+        int responseCode = conn.getResponseCode();
+        if (responseCode == HttpsURLConnection.HTTP_OK) {
+            response = readStream(conn.getInputStream());
+            Log.e("postData:", response);
+        } else {
+            Log.e("postData:" , conn.getResponseMessage());
+        }
+        return response;
+    }
+    public String postDataIncludeInBody(String url, Map<String, String> params) throws IOException {
+        HttpsURLConnection conn = setUpHttpsConnection(url);
+
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params.toString());
+
+        conn.setDoInput(true);
+        conn.setDoOutput(true);
+        conn.setRequestMethod("POST");
+        //conn.setChunkedStreamingMode(0);
+        conn.setHostnameVerifier(hostnameVerifier);
+
+        OutputStream out = new BufferedOutputStream(conn.getOutputStream());
+        out.write(body.toString().getBytes());
+        out.flush();
+        out.close();
+        String response=null;
+        int responseCode = conn.getResponseCode();
+        if (responseCode == HttpsURLConnection.HTTP_OK) {
+            response = readStream(conn.getInputStream());
+            Log.e("postData:", response);
+        } else {
+            Log.e("postData:" , conn.getResponseMessage());
+        }
+        return response;
+    }
+
 
     public String getData(String url) throws IOException {
         HttpsURLConnection conn = setUpHttpsConnection(url);

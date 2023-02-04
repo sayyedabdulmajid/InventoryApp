@@ -1,0 +1,41 @@
+{
+  "ItemCode": "27131614SD02497",
+  "ShortDescription": "Manifold Block AI Threaded",
+  "LongDescription": "Manifold Block with AI thread for mounting on the Fixture",
+  "Location": "Cupboard C1-B15",
+  "CreatedOn": "/Date(1675508709323)/",
+  "UpdatedOn": "/Date(1675508709323)/",
+  "CreatedBy": null,
+  "UpdatedBy": null,
+  "AvailableStock": 150,
+  "ReOrderLevel": 50,
+  "MinStockLevel": 40,
+  "UnitId": 1,
+  "Unit": null,
+  "Price": 500,
+  "Disable": false
+}
+
+{
+  "Id": 0,
+  "ItemCode": null,
+  "Item": null,
+  "StockToAdd": 0,
+  "StockAvailable": 0,
+  "StockAfterInbound": 0,
+  "UnitId": 0,
+  "Unit": null,
+  "UnitName": null,
+  "UserId": 0,
+  "UserName": null,
+  "User": null,
+  "RequestedBy": null,
+  "RequisitionRef": null,
+  "ChallenNo": null,
+  "VendorName": null,
+  "DateOfEntry": "/Date(-62135596800000)/",
+  "TotalPrice": 0,
+  "InboundDate": "/Date(-62135596800000)/",
+  "InforInboundNo": null,
+  "Remark": null
+}

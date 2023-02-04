@@ -8,53 +8,45 @@
 
     <Button
         android:id="@+id/OutboundBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="525dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="75dp"
+        android:layout_width="265dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="52dp"
         android:background="@drawable/btn_bg"
         android:text="@string/MenuActOutboundBtnTxt"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/centerTextDisplay"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/centerTextDisplay"
-        app:layout_constraintTop_toBottomOf="@+id/centerTextDisplay"
-        app:layout_constraintVertical_bias="0.104" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/centerTextDisplay" />
 
     <Button
         android:id="@+id/InboundBtn"
-        android:layout_width="0dp"
+        android:layout_width="265dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="525dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/btn_bg"
         android:text="@string/MenuActInboundBtnTxt"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/centerTextDisplay"
+	app:layout_constraintBottom_toBottomOf="@+id/OutboundBtn"
+        app:layout_constraintEnd_toStartOf="@+id/OutboundBtn"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/centerTextDisplay"
-        app:layout_constraintTop_toBottomOf="@+id/centerTextDisplay"
-        app:layout_constraintVertical_bias="0.104" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/centerTextDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="801dp"
+        android:layout_height="120dp"
         android:text="@string/MenuActCenterDisplayTxt"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="48sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+	app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.156" />
+        app:layout_constraintVertical_bias="0.409" />
 
     <ImageButton
         android:id="@+id/BackBtn"
@@ -84,15 +76,13 @@
 
     <TextView
         android:id="@+id/UserNameTextView"
-        android:layout_width="217dp"
-        android:layout_height="34dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="584dp"
         android:text="@string/MenuActUserNameTxt"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.984"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintStart_toEndOf="@+id/BackBtn"
+        tools:layout_editor_absoluteY="40dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
