@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -28,6 +30,7 @@ import com.example.inventoryapp.HTTPSClass;
 import com.example.inventoryapp.Inbound.Inbound;
 import com.example.inventoryapp.Item.Item;
 import com.example.inventoryapp.R;
+import com.example.inventoryapp.User.User;
 import com.example.inventoryapp.Utility;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -58,7 +61,7 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
     private Button DateButton;
     TextView ItemCodeTxtBox;
     AutoCompleteTextView atv,atv2;
-
+    TextView UserProf;
 
     Item ItemReceivedFromUrl;
     Inbound InboundItem = new Inbound();
@@ -66,7 +69,7 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
     private ArrayAdapter<String> adapterAutoComplete;
     private List<String> searchResults;
     String[] days = new String[]{"19070125078", "190701250708977", "190701255477", "190701276890", "19070154775", "1907012322323", "1907012244"};
-
+    String UserName;
 
     Button InboundScanBtn;
 
@@ -76,6 +79,10 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbound);
+        setUserName();
+        UserProf =findViewById(R.id.IUserNameTextView);
+        UserProf.setText(UserName);
+
         setAllVariableWithUIElement();
         InboundScanBtn =findViewById(R.id.IInboundScanButton);
         InboundScanBtn.setOnClickListener(new View.OnClickListener() {
@@ -178,9 +185,10 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
                                         @Override
                                         public void run() {
                                             try {
-                                                if(response.equals("{\"success\":true}"))
+                                                if(response != null && response.equals("{\"success\":true}"))
                                                 {
                                                     ItemReceivedFromUrl = Item.fromJsonStrToObj(ItemJsonFormatStr);
+                                                    ClearAllUIElementText();
                                                     Toast.makeText(InboundActivity.this, "Update Success", Toast.LENGTH_LONG).show();
                                                 }
                                                 else
@@ -394,10 +402,14 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
 
         @Override
         protected void onPostExecute(String[] spinnerData) {
-            spinnerData = Utility.InsertStrInStrArrayAtPos(spinnerData,"",0);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(InboundActivity.this, android.R.layout.simple_spinner_item, spinnerData);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            IndenterSpinner.setAdapter(adapter);
+            if(spinnerData.length!=0)
+            {
+                spinnerData = Utility.InsertStrInStrArrayAtPos(spinnerData,"",0);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(InboundActivity.this, android.R.layout.simple_spinner_item, spinnerData);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                IndenterSpinner.setAdapter(adapter);
+            }
+
         }
     }
 
@@ -440,6 +452,7 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
                 try {
                     Map<String,String> dataToPost = new HashMap<String,String>();
                     dataToPost.put("ItemCode",ItemCodeStr);
+                    dataToPost.put("UserName",UserName);
                     HTTPSClass httpsClass = new HTTPSClass(InboundActivity.this);
                     String url = "https://172.30.54.85/Inbounds/GetInboundBlank";
                     String ItemJsonFormatStr = httpsClass.postData(url, dataToPost);
@@ -468,65 +481,59 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
                 }
             }
         });
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Map<String,String> dataToPost = new HashMap<String,String>();
-                    dataToPost.put("ItemCode",ItemCodeStr);
-                    HTTPSClass httpsClass = new HTTPSClass(InboundActivity.this);
-                    String url = "https://172.30.54.85/Items/GetItemByItemCode";
-                    String ItemJsonFormatStr = httpsClass.postData(url, dataToPost);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                if(ItemJsonFormatStr!=null)
-                                {
-                                    ItemReceivedFromUrl = Item.fromJsonStrToObj(ItemJsonFormatStr);
-                                }
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                    });
-                } catch (Exception e) {
-                    Log.e("InboundActivity", "Error sending itemcode to Item Controller", e);
-                }
-            }
-        });
+//        AsyncTask.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Map<String,String> dataToPost = new HashMap<String,String>();
+//                    dataToPost.put("ItemCode",ItemCodeStr);
+//                    HTTPSClass httpsClass = new HTTPSClass(InboundActivity.this);
+//                    String url = "https://172.30.54.85/Items/GetItemByItemCode";
+//                    String ItemJsonFormatStr = httpsClass.postData(url, dataToPost);
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                if(ItemJsonFormatStr!=null)
+//                                {
+//                                    ItemReceivedFromUrl = Item.fromJsonStrToObj(ItemJsonFormatStr);
+//                                }
+//                            } catch (Exception e) {
+//                                throw new RuntimeException(e);
+//                            }
+//                        }
+//                    });
+//                } catch (Exception e) {
+//                    Log.e("InboundActivity", "Error sending itemcode to Item Controller", e);
+//                }
+//            }
+//        });
     }
 
     private void setAllVariableWithUIElement()
     {
         ItemCodeTxtBox =findViewById(R.id.IItemCodeEditTxt);
         InboundQtyEditText =findViewById(R.id.IInboundQtyEditText);
+        InboundQtyEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                CalculateNewStockValue();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         InboundQtyEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                try
-                {
-                    String currentStock = CurrentStockEditTxt.getText().toString().trim();
-                    String inboundQty = InboundQtyEditText.getText().toString().trim();
-
-                    if (!currentStock.isEmpty() && !inboundQty.isEmpty() &&
-                            Float.parseFloat(currentStock) != 0.0 && Float.parseFloat(inboundQty) != 0.0) {
-                        float iq = Float.parseFloat(inboundQty);
-                        float cs = Float.parseFloat(currentStock);
-                        float ns = iq + cs;
-                        NewStockEditTxt.setText(String.valueOf(ns));
-                        if(ItemReceivedFromUrl!=null)
-                        {
-                            float totalPrice = iq * Float.parseFloat(ItemReceivedFromUrl.getPrice().toString());
-                            TotalPriceEditTxt.setText(String.valueOf(totalPrice));
-                        }
-                    } else if (!currentStock.isEmpty()) {
-                        NewStockEditTxt.setText(currentStock);
-                    }
-                }catch(Exception ex)
-                {
-                    throw new RuntimeException(ex);
-                }
+                CalculateNewStockValue();
             }
         });
         CurrentStockEditTxt =findViewById(R.id.ICurrentStockEditTxt);
@@ -542,6 +549,75 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
         SupplierEditTxt =findViewById(R.id.ISupplierEditTxt);
         RemarkMultiEditTxt =findViewById(R.id.IRemarkMultiEditTxt);
 
+    }
+
+    private void setUserName()
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        UserName = preferences.getString("UserName", null);
+        if(UserName==null)
+        {
+            startActivity(new Intent(InboundActivity.this,LoginActivity.class));
+            finish();
+        }
+    }
+    private void CalculateNewStockValue()
+    {
+        try
+        {
+            String currentStock = CurrentStockEditTxt.getText().toString().trim();
+            String inboundQty = InboundQtyEditText.getText().toString().trim();
+
+            if (!currentStock.isEmpty() && !inboundQty.isEmpty() &&
+                    Float.parseFloat(currentStock) != 0.0 && Float.parseFloat(inboundQty) != 0.0) {
+                float iq = Float.parseFloat(inboundQty);
+                float cs = Float.parseFloat(currentStock);
+                float ns = iq + cs;
+                NewStockEditTxt.setText(String.valueOf(ns));
+//                if(ItemReceivedFromUrl!=null)
+//                {
+//                    float totalPrice = iq * Float.parseFloat(ItemReceivedFromUrl.getPrice().toString());
+//                    TotalPriceEditTxt.setText(String.valueOf(totalPrice));
+//                }
+            } else if (!currentStock.isEmpty()) {
+                NewStockEditTxt.setText(currentStock);
+            }
+        }catch(Exception ex)
+        {
+            throw new RuntimeException(ex);
+        }
+    }
+    private void ClearAllUIElementText()
+    {
+        ItemCodeTxtBox.setText("");
+        InboundQtyEditText.setText("");
+        CurrentStockEditTxt.setText("");
+        TotalPriceEditTxt.setText("");
+        InvoiceNumberEditTxt.setText("");
+        InboundOrderEditTxt.setText("");
+        DescriptionEditTxt.setText("");
+        UnitEditTxt.setText("");
+        NewStockEditTxt.setText("");
+        RequisitionNumEditTxt.setText("");
+        SupplierEditTxt.setText("");
+        RemarkMultiEditTxt.setText("");
+        IndenterSpinner.setSelection(0);
+        ClearAllUIElementError();
+    }
+    private void ClearAllUIElementError()
+    {
+        ItemCodeTxtBox.setError(null);
+        InboundQtyEditText.setError(null);
+        CurrentStockEditTxt.setError(null);
+        NewStockEditTxt.setError(null);
+        TotalPriceEditTxt.setError(null);
+        InvoiceNumberEditTxt.setError(null);
+        DateButton.setError(null);
+        DescriptionEditTxt.setError(null);
+        UnitEditTxt.setError(null);
+        RequisitionNumEditTxt.setError(null);
+        SupplierEditTxt.setError(null);
+        RemarkMultiEditTxt.setError(null);
     }
 
 }

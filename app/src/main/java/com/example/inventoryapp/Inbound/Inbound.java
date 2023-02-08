@@ -75,6 +75,15 @@ public class Inbound {
         UnitName = unitName;
     }
 
+
+    public int getUnitId() {return UnitId;}
+
+    public void setUnitId(int unitId) {UnitId = unitId;}
+
+    public int getUserId() {return UserId;}
+
+    public void setUserId(int userId) {UserId = userId;}
+
     public String getUserName() {
         return UserName;
     }
@@ -163,10 +172,10 @@ public class Inbound {
     private BigDecimal StockAfterInbound;
 
 
-    //private int UnitId;
+    private int UnitId;
     //private Unit Unit;
     private String UnitName;
-    //private int UserId;
+    private int UserId;
     private String UserName;
     //private User User;
 
