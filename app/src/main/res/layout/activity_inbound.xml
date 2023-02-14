@@ -353,14 +353,16 @@
         android:layout_height="0dp"
         android:background="@drawable/input_bg"
         android:ems="10"
+        android:enabled="false"
         android:hint="0.00"
         android:inputType="none"
-        android:enabled="false"
         android:paddingStart="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/INewStockLabel"
         app:layout_constraintEnd_toEndOf="@+id/IUnitEditTxt"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/IUnitEditTxt"
-        app:layout_constraintTop_toTopOf="@+id/INewStockLabel" />
+        app:layout_constraintTop_toTopOf="@+id/INewStockLabel"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/IRemarkMultiEditTxt"
@@ -449,7 +451,7 @@
         app:srcCompat="@drawable/arrow_full" />
 
     <Button
-        android:id="@+id/IInboundScanButton"
+        android:id="@+id/QRScanInboundBtn"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:drawableEnd="@drawable/qrscanner"

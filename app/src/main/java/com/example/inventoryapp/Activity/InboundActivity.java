@@ -30,14 +30,12 @@ import com.example.inventoryapp.HTTPSClass;
 import com.example.inventoryapp.Inbound.Inbound;
 import com.example.inventoryapp.Item.Item;
 import com.example.inventoryapp.R;
-import com.example.inventoryapp.User.User;
 import com.example.inventoryapp.Utility;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -71,7 +69,7 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
     String[] days = new String[]{"19070125078", "190701250708977", "190701255477", "190701276890", "19070154775", "1907012322323", "1907012244"};
     String UserName;
 
-    Button InboundScanBtn;
+    Button QRScanInboundButton;
 
     String ItemJsonFormatStr;
 
@@ -84,8 +82,8 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
         UserProf.setText(UserName);
 
         setAllVariableWithUIElement();
-        InboundScanBtn =findViewById(R.id.IInboundScanButton);
-        InboundScanBtn.setOnClickListener(new View.OnClickListener() {
+        QRScanInboundButton =findViewById(R.id.QRScanInboundBtn);
+        QRScanInboundButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -157,7 +155,7 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
                         InboundItem.setTotalPrice(BigDecimal.valueOf(Double.valueOf(TotalPriceEditTxt.getText().toString())));
 
                         InboundItem.setItemCode(ItemCodeTxtBox.getText().toString());
-                        InboundItem.setDescription(DescriptionEditTxt.getText().toString());
+                        //InboundItem.setDescription(DescriptionEditTxt.getText().toString());
                         InboundItem.setUnitName(UnitEditTxt.getText().toString());
 
                         InboundItem.setUserName("Majid");
@@ -455,7 +453,7 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
                     dataToPost.put("UserName",UserName);
                     HTTPSClass httpsClass = new HTTPSClass(InboundActivity.this);
                     String url = "https://172.30.54.85/Inbounds/GetInboundBlank";
-                    String ItemJsonFormatStr = httpsClass.postData(url, dataToPost);
+                    ItemJsonFormatStr = httpsClass.postData(url, dataToPost);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -467,7 +465,6 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
                                     ItemCodeTxtBox.setText ( InboundItem.getItemCode() );
                                     UnitEditTxt.setText(InboundItem.getUnitName() );
                                     CurrentStockEditTxt.setText( InboundItem.getStockAvailable().toString() );
-                                    DescriptionEditTxt.setText(InboundItem.getDescription());
                                 }
 
                                //ExtractJsonObjectToItemClass(new JSONObject(ItemJsonFormatStr));
@@ -481,33 +478,34 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
                 }
             }
         });
-//        AsyncTask.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Map<String,String> dataToPost = new HashMap<String,String>();
-//                    dataToPost.put("ItemCode",ItemCodeStr);
-//                    HTTPSClass httpsClass = new HTTPSClass(InboundActivity.this);
-//                    String url = "https://172.30.54.85/Items/GetItemByItemCode";
-//                    String ItemJsonFormatStr = httpsClass.postData(url, dataToPost);
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//                                if(ItemJsonFormatStr!=null)
-//                                {
-//                                    ItemReceivedFromUrl = Item.fromJsonStrToObj(ItemJsonFormatStr);
-//                                }
-//                            } catch (Exception e) {
-//                                throw new RuntimeException(e);
-//                            }
-//                        }
-//                    });
-//                } catch (Exception e) {
-//                    Log.e("InboundActivity", "Error sending itemcode to Item Controller", e);
-//                }
-//            }
-//        });
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Map<String,String> dataToPost = new HashMap<String,String>();
+                    dataToPost.put("ItemCode",ItemCodeStr);
+                    HTTPSClass httpsClass = new HTTPSClass(InboundActivity.this);
+                    String url = "https://172.30.54.85/Items/GetItemByItemCode";
+                    String ItemJsonFormatStr = httpsClass.postData(url, dataToPost);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                if(ItemJsonFormatStr!=null)
+                                {
+                                    ItemReceivedFromUrl = Item.fromJsonStrToObj(ItemJsonFormatStr);
+                                    DescriptionEditTxt.setText(ItemReceivedFromUrl.getLongDescription());
+                                }
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.e("InboundActivity", "Error sending itemcode to Item Controller", e);
+                }
+            }
+        });
     }
 
     private void setAllVariableWithUIElement()

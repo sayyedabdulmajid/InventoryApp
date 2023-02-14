@@ -31,13 +31,13 @@ public class Inbound {
     public String getItemCode() {
         return ItemCode;
     }
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
+//    public String getDescription() {
+//        return Description;
+//    }
+//
+//    public void setDescription(String description) {
+//        Description = description;
+//    }
 
     public void setItemCode(String itemCode) {
         ItemCode = itemCode;
@@ -166,7 +166,7 @@ public class Inbound {
 
     private long Id;
     private String ItemCode;
-    private String Description;
+    //private String Description;
     private BigDecimal StockToAdd;
     private BigDecimal StockAvailable;
     private BigDecimal StockAfterInbound;

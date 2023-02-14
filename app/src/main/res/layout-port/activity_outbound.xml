@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     android:paddingStart="15sp"
     tools:context=".Activity.OutboundActivity">
+    <TextView
+        android:id="@+id/OUserNameTextView"
+        android:layout_width="217dp"
+        android:layout_height="34dp"
+        android:text="@string/MenuActUserNameTxt"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.984"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.052" />
 
     <Button
         android:id="@+id/UpdateOutboundBtn"
@@ -47,6 +59,15 @@
         app:layout_constraintTop_toBottomOf="@+id/OOutboundHeaderDisplay" />
 
     <TextView
+        android:id="@+id/ONewStockLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="New Stock"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/OCurrentStockLabel"
+        app:layout_constraintTop_toBottomOf="@+id/OCurrentStockLabel" />
+    <TextView
         android:id="@+id/OCurrentStockLabel"
         android:layout_width="wrap_content"
         android:layout_height="43dp"
@@ -73,8 +94,8 @@
         android:layout_marginTop="25dp"
         android:text="Outbound order"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/OCurrentStockLabel"
-        app:layout_constraintTop_toBottomOf="@+id/OCurrentStockLabel" />
+        app:layout_constraintStart_toStartOf="@+id/ONewStockLabel"
+        app:layout_constraintTop_toBottomOf="@+id/ONewStockLabel" />
 
     <TextView
         android:id="@+id/OTotalValueLabel"
@@ -141,6 +162,19 @@
         app:layout_constraintBottom_toBottomOf="@+id/OOutboundOrderLabel"
         app:layout_constraintStart_toStartOf="@+id/OCurrentStockEditTxt"
         app:layout_constraintTop_toTopOf="@+id/OOutboundOrderLabel" />
+    <EditText
+        android:id="@+id/ONewStockEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:inputType="none"
+        android:enabled="false"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ONewStockLabel"
+        app:layout_constraintEnd_toEndOf="@+id/OCurrentStockEditTxt"
+        app:layout_constraintStart_toStartOf="@+id/OCurrentStockEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/ONewStockLabel" />
 
     <EditText
         android:id="@+id/OCurrentStockEditTxt"
@@ -233,7 +267,6 @@
         android:background="@drawable/input_bg"
         android:drawableEnd="@drawable/date"
         android:hint="Date"
-        android:onClick="openDatePicker"
         android:paddingStart="15sp"
         android:paddingEnd="15sp"
         android:textColor="@color/black"
@@ -243,7 +276,7 @@
         app:layout_constraintTop_toTopOf="@+id/OOutboundDateLabel" />
 
     <ImageButton
-        android:id="@+id/backButton"
+        android:id="@+id/OBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-50dp"
@@ -253,7 +286,7 @@
         app:srcCompat="@drawable/arrow_full" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/QRScanOutboundBtn"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:drawableEnd="@drawable/qrscanner"
