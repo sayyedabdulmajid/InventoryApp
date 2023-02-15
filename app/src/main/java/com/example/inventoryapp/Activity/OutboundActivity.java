@@ -299,9 +299,12 @@ public class OutboundActivity extends AppCompatActivity {
                                 if(ItemJsonFormatStr!=null)
                                 {
                                     ItemReceivedFromUrl = Item.fromJsonStrToObj(ItemJsonFormatStr);
-                                    PricePerUnitEditTxt.setText(ItemReceivedFromUrl.getPrice().toString());
-                                    DescriptionEditTxt.setText(ItemReceivedFromUrl.getLongDescription());
-                                    ItemLocationEditText.setText(ItemReceivedFromUrl.getLocation());
+                                    if(ItemReceivedFromUrl!=null)
+                                    {
+                                        PricePerUnitEditTxt.setText(ItemReceivedFromUrl.getPrice().toString());
+                                        DescriptionEditTxt.setText(ItemReceivedFromUrl.getLongDescription());
+                                        ItemLocationEditText.setText(ItemReceivedFromUrl.getLocation());
+                                    }
                                 }
                             } catch (Exception e) {
                                 throw new RuntimeException(e);

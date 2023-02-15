@@ -497,8 +497,12 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
                                 if(ItemJsonFormatStr!=null)
                                 {
                                     ItemReceivedFromUrl = Item.fromJsonStrToObj(ItemJsonFormatStr);
-                                    DescriptionEditTxt.setText(ItemReceivedFromUrl.getLongDescription());
-                                    ItemLocationEditTxt.setText(ItemReceivedFromUrl.getLocation());
+                                    if(ItemReceivedFromUrl!=null)
+                                    {
+                                        DescriptionEditTxt.setText(ItemReceivedFromUrl.getLongDescription());
+                                        ItemLocationEditTxt.setText(ItemReceivedFromUrl.getLocation());
+                                    }
+
                                 }
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
