@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="15sp"
-    tools:context=".Activity.OutboundActivity">
+    tools:context=".Activity.OutboundActivity"
+    tools:layout_editor_absoluteX="4dp"
+    tools:layout_editor_absoluteY="95dp">
 
     <TextView
         android:id="@+id/OUserNameTextView"
@@ -30,9 +32,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.914" />
+        app:layout_constraintVertical_bias="0.964" />
 
     <TextView
         android:id="@+id/OOutboundHeaderDisplay"
@@ -88,6 +91,7 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/OCurrentStockLabel"
         app:layout_constraintTop_toBottomOf="@+id/OCurrentStockLabel" />
+
     <TextView
         android:id="@+id/OOutboundOrderLabel"
         android:layout_width="wrap_content"
@@ -99,6 +103,17 @@
         app:layout_constraintTop_toBottomOf="@+id/ONewStockLabel" />
 
     <TextView
+        android:id="@+id/OItemLocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="Item Location"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/OOutboundOrderLabel"
+        app:layout_constraintTop_toBottomOf="@+id/OOutboundOrderLabel" />
+
+
+    <TextView
         android:id="@+id/OTotalValueLabel"
         android:layout_width="wrap_content"
         android:layout_height="43dp"
@@ -107,6 +122,16 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/OPricePerUnitLabel"
         app:layout_constraintTop_toBottomOf="@+id/OPricePerUnitLabel" />
+
+    <TextView
+        android:id="@+id/ODeptNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="Dept Name"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/OTotalValueLabel"
+        app:layout_constraintTop_toBottomOf="@+id/OTotalValueLabel" />
 
     <TextView
         android:id="@+id/OPricePerUnitLabel"
@@ -127,6 +152,7 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/OItemCodeLabel"
         app:layout_constraintTop_toBottomOf="@+id/OItemCodeLabel" />
+
     <TextView
         android:id="@+id/OUnitLabel"
         android:layout_width="wrap_content"
@@ -176,13 +202,27 @@
         app:layout_constraintTop_toTopOf="@+id/OOutboundOrderLabel" />
 
     <EditText
+        android:id="@+id/OItemLocationEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/OItemLocationLabel"
+        app:layout_constraintStart_toStartOf="@+id/OOutboundOrderEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/OItemLocationLabel" />
+
+
+    <EditText
         android:id="@+id/ONewStockEditTxt"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@drawable/input_bg"
         android:ems="10"
-        android:inputType="none"
         android:enabled="false"
+        android:inputType="none"
         android:paddingStart="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/ONewStockLabel"
         app:layout_constraintEnd_toEndOf="@+id/OCurrentStockEditTxt"
@@ -195,8 +235,8 @@
         android:layout_height="0dp"
         android:background="@drawable/input_bg"
         android:ems="10"
-        android:inputType="none"
         android:enabled="false"
+        android:inputType="none"
         android:paddingStart="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/OCurrentStockLabel"
         app:layout_constraintEnd_toEndOf="@+id/ODescriptionEditTxt"
@@ -209,13 +249,26 @@
         android:layout_height="0dp"
         android:background="@drawable/input_bg"
         android:ems="10"
+        android:enabled="false"
         android:hint="0.00"
         android:inputType="none"
-        android:enabled="false"
         android:paddingStart="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/OTotalValueLabel"
         app:layout_constraintStart_toStartOf="@+id/PricePerUnitEditTxt"
         app:layout_constraintTop_toTopOf="@+id/OTotalValueLabel" />
+
+    <Spinner
+        android:id="@+id/OSpinnerDeptName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ODeptNameLabel"
+        app:layout_constraintEnd_toEndOf="@+id/OTotalValueEditTxt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/OTotalValueEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/ODeptNameLabel"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/PricePerUnitEditTxt"
@@ -223,9 +276,9 @@
         android:layout_height="0dp"
         android:background="@drawable/input_bg"
         android:ems="10"
+        android:enabled="false"
         android:hint="0.00"
         android:inputType="none"
-        android:enabled="false"
         android:paddingStart="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/OPricePerUnitLabel"
         app:layout_constraintStart_toStartOf="@+id/OQtyEditTxt"
@@ -243,6 +296,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/OQtyLabel"
         app:layout_constraintStart_toStartOf="@+id/OItemCodeEditTxt"
         app:layout_constraintTop_toTopOf="@+id/OQtyLabel" />
+
     <EditText
         android:id="@+id/OUnitEditTxt"
         android:layout_width="wrap_content"
@@ -334,23 +388,26 @@
         android:id="@+id/ORemarkLabel"
         android:layout_width="wrap_content"
         android:layout_height="43dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="25dp"
         android:text="Remark"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/OTotalValueLabel"
-        app:layout_constraintTop_toBottomOf="@+id/OTotalValueLabel" />
+        app:layout_constraintStart_toStartOf="@+id/ODeptNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/ODeptNameLabel" />
 
     <EditText
         android:id="@+id/ORemarkMultiEditTxt"
         android:layout_width="206dp"
         android:layout_height="76dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/search_bar_bg"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:paddingStart="15sp"
         android:paddingEnd="15sp"
-        app:layout_constraintStart_toStartOf="@+id/OTotalValueEditTxt"
+        app:layout_constraintStart_toStartOf="@+id/OSpinnerDeptName"
         app:layout_constraintTop_toTopOf="@+id/ORemarkLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

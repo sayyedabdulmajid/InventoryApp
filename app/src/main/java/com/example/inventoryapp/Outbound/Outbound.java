@@ -22,10 +22,10 @@ public class Outbound {
     private BigDecimal StockAfterOutbound ;
     private String UnitName ;
     private String UserName;
-    private String AuthorisedBy;
-    private String UsedBy;
+    //private String AuthorisedBy;
+    //private String UsedBy;
     private String DepartmentName;
-    private String Purpose;
+    //private String Purpose;
     private Timestamp DateOfEntry;
     private BigDecimal TotalPrice;
     private Timestamp OutboundDate;
@@ -46,14 +46,14 @@ public class Outbound {
     public void setUnitName(String unitName) {UnitName = unitName;}
     public String getUserName() {return UserName;}
     public void setUserName(String userName) {UserName = userName;}
-    public String getAuthorisedBy() {return AuthorisedBy;}
-    public void setAuthorisedBy(String authorisedBy) {AuthorisedBy = authorisedBy;}
-    public String getUsedBy() {return UsedBy;}
-    public void setUsedBy(String usedBy) {UsedBy = usedBy;}
+//    public String getAuthorisedBy() {return AuthorisedBy;}
+//    public void setAuthorisedBy(String authorisedBy) {AuthorisedBy = authorisedBy;}
+//    public String getUsedBy() {return UsedBy;}
+//    public void setUsedBy(String usedBy) {UsedBy = usedBy;}
     public String getDepartmentName() {return DepartmentName;}
     public void setDepartmentName(String departmentName) {DepartmentName = departmentName;}
-    public String getPurpose() {return Purpose;}
-    public void setPurpose(String purpose) {Purpose = purpose;}
+//    public String getPurpose() {return Purpose;}
+//    public void setPurpose(String purpose) {Purpose = purpose;}
     public Timestamp getDateOfEntry() {return DateOfEntry;}
     public void setDateOfEntry(Timestamp dateOfEntry) {DateOfEntry = dateOfEntry;}
     public BigDecimal getTotalPrice() {return TotalPrice;}

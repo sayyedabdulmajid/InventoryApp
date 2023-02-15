@@ -94,6 +94,21 @@
         app:layout_constraintStart_toStartOf="@+id/IInvoiceNumberEditTxt"
         app:layout_constraintTop_toTopOf="@+id/IInboundOrderLabel" />
 
+    <EditText
+        android:id="@+id/IItemLocationEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:enabled="false"
+        android:text=""
+        android:inputType="textPersonName"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/IItemLocationLabel"
+        app:layout_constraintEnd_toEndOf="@+id/IInboundOrderEditTxt"
+        app:layout_constraintStart_toStartOf="@+id/IInboundOrderEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/IItemLocationLabel" />
+
     <TextView
         android:id="@+id/IRemarkLabel"
         android:layout_width="wrap_content"
@@ -175,6 +190,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/IInvoiceNumberLabel"
         app:layout_constraintTop_toBottomOf="@+id/IInvoiceNumberLabel" />
+
+    <TextView
+        android:id="@+id/IItemLocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Item Location"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/IInboundOrderLabel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/IInboundOrderLabel"
+        app:layout_constraintTop_toBottomOf="@+id/IInboundOrderLabel" />
 
     <TextView
         android:id="@+id/IHeaderLabel"

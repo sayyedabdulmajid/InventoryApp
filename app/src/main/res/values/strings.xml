@@ -21,5 +21,6 @@
         <item>Faisal</item>
     </string-array>
     <string name="UserIndentorListLink">https://172.30.54.85/Users/getIndentorList</string>
+    <string name="DepartmentListLink">https://172.30.54.85/Departments/getDepartmentList</string>
 
 </resources>

@@ -51,7 +51,7 @@ import java.util.Map;
 public class InboundActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,View.OnClickListener {
 
 
-    private EditText InboundQtyEditText,CurrentStockEditTxt,TotalPriceEditTxt;
+    private EditText InboundQtyEditText,CurrentStockEditTxt,TotalPriceEditTxt, ItemLocationEditTxt;
     private EditText InvoiceNumberEditTxt,InboundOrderEditTxt,DescriptionEditTxt;
     private EditText UnitEditTxt,NewStockEditTxt, RequisitionNumEditTxt,SupplierEditTxt,RemarkMultiEditTxt;
     private Spinner IndenterSpinner;
@@ -264,6 +264,9 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
             return false;
         }else if (RemarkMultiEditTxt.getText().toString().trim().isEmpty()) {
             RemarkMultiEditTxt.setError("Stock After Inbound is required");
+            return false;
+        }else if (ItemLocationEditTxt.getText().toString().trim().isEmpty()) {
+            ItemLocationEditTxt.setError("Location is required");
             return false;
         }
         return true;
@@ -495,6 +498,7 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
                                 {
                                     ItemReceivedFromUrl = Item.fromJsonStrToObj(ItemJsonFormatStr);
                                     DescriptionEditTxt.setText(ItemReceivedFromUrl.getLongDescription());
+                                    ItemLocationEditTxt.setText(ItemReceivedFromUrl.getLocation());
                                 }
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
@@ -541,6 +545,7 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
         InboundOrderEditTxt =findViewById(R.id.IInboundOrderEditTxt);
         DescriptionEditTxt =findViewById(R.id.IDescriptionEditTxt);
         UnitEditTxt =findViewById(R.id.IUnitEditTxt);
+        ItemLocationEditTxt =findViewById(R.id.IItemLocationEditTxt);
 
         NewStockEditTxt =findViewById(R.id.INewStockEditTxt);
         RequisitionNumEditTxt =findViewById(R.id.IRequisitionNumEditTxt);
@@ -595,6 +600,7 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
         InboundOrderEditTxt.setText("");
         DescriptionEditTxt.setText("");
         UnitEditTxt.setText("");
+        ItemLocationEditTxt.setText("");
         NewStockEditTxt.setText("");
         RequisitionNumEditTxt.setText("");
         SupplierEditTxt.setText("");
@@ -612,6 +618,7 @@ public class InboundActivity extends AppCompatActivity implements AdapterView.On
         InvoiceNumberEditTxt.setError(null);
         DateButton.setError(null);
         DescriptionEditTxt.setError(null);
+        ItemLocationEditTxt.setError(null);
         UnitEditTxt.setError(null);
         RequisitionNumEditTxt.setError(null);
         SupplierEditTxt.setError(null);

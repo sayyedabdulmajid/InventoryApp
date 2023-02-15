@@ -13,10 +13,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +28,11 @@ import com.example.inventoryapp.Item.Item;
 import com.example.inventoryapp.Outbound.Outbound;
 import com.example.inventoryapp.R;
 import com.example.inventoryapp.UpdateTimeTask;
+import com.example.inventoryapp.Utility;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -39,17 +43,18 @@ import java.util.Map;
 
 public class OutboundActivity extends AppCompatActivity {
 
-    Button QRScanOutboundButton,UpdateOutboundBtn;
-    Button DateButton;
-    ImageButton backButton;
-    AutoCompleteTextView SearchBoxAutoTxtV;
-    EditText ItemCodeTxtBox,QtyEditTxt,PricePerUnitEditTxt,TotalValueEditTxt,UnitEditTxt;
-    EditText RemarkMultiEditTxt,DescriptionEditTxt,CurrentStockEditTxt,NewStockEditTxt,OutboundOrderEditTxt;
-    TextView UserProf;
-    String UserName;
-    Item ItemReceivedFromUrl;
-    Outbound OutboundObj;
-    String ItemJsonFormatStr;
+    private Button QRScanOutboundButton,UpdateOutboundBtn;
+    private Button DateButton;
+    private ImageButton backButton;
+    private AutoCompleteTextView SearchBoxAutoTxtV;
+    private EditText ItemCodeTxtBox,QtyEditTxt,PricePerUnitEditTxt,TotalValueEditTxt,UnitEditTxt,ItemLocationEditText;
+    private EditText RemarkMultiEditTxt,DescriptionEditTxt,CurrentStockEditTxt,NewStockEditTxt,OutboundOrderEditTxt;
+    private Spinner DeptNameSpinner;
+    private TextView UserProf;
+    private String UserName;
+    private Item ItemReceivedFromUrl;
+    private Outbound OutboundObj;
+    private String ItemJsonFormatStr;
     private Handler mHandler;
     private Runnable mRunnable;
 
@@ -96,6 +101,7 @@ public class OutboundActivity extends AppCompatActivity {
                         OutboundObj.setUnitName(UnitEditTxt.getText().toString());
 
                         OutboundObj.setUserName(UserName);
+                        OutboundObj.setDepartmentName(DeptNameSpinner.getSelectedItem().toString());
 
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                         String timestamp = formatter.format(new Date());
@@ -132,7 +138,7 @@ public class OutboundActivity extends AppCompatActivity {
                                         }
                                     });
                                 } catch (Exception e) {
-                                    Log.e("InboundActivity", "Error sending itemcode to Item Controller", e);
+                                    Log.e("OutboundActivity", "Error sending itemcode to Item Controller", e);
                                 }
                             }
                         });
@@ -165,6 +171,10 @@ public class OutboundActivity extends AppCompatActivity {
             }
         };
         mHandler.post(mRunnable);
+
+        DeptNameSpinner = findViewById(R.id.OSpinnerDeptName);
+        new OutboundActivity.NetworkFetchSpinnerData().execute();
+
 
     }
 
@@ -217,6 +227,9 @@ public class OutboundActivity extends AppCompatActivity {
         } else if (DescriptionEditTxt.getText().toString().trim().isEmpty()) {
             DescriptionEditTxt.setError("Description is required");
             return false;
+        } else if (ItemLocationEditText.getText().toString().trim().isEmpty()) {
+            ItemLocationEditText.setError("Item Location is required");
+            return false;
         } else if (UnitEditTxt.getText().toString().trim().isEmpty()) {
             UnitEditTxt.setError("Stock After Inbound is required");
             return false;
@@ -228,6 +241,9 @@ public class OutboundActivity extends AppCompatActivity {
             return false;
         }else if (RemarkMultiEditTxt.getText().toString().trim().isEmpty()) {
             RemarkMultiEditTxt.setError("Stock After Inbound is required");
+            return false;
+        }else if (DeptNameSpinner.getSelectedItem().toString().trim().isEmpty()) {
+            Toast.makeText(this, "Department is required", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -285,6 +301,7 @@ public class OutboundActivity extends AppCompatActivity {
                                     ItemReceivedFromUrl = Item.fromJsonStrToObj(ItemJsonFormatStr);
                                     PricePerUnitEditTxt.setText(ItemReceivedFromUrl.getPrice().toString());
                                     DescriptionEditTxt.setText(ItemReceivedFromUrl.getLongDescription());
+                                    ItemLocationEditText.setText(ItemReceivedFromUrl.getLocation());
                                 }
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
@@ -328,7 +345,7 @@ public class OutboundActivity extends AppCompatActivity {
         PricePerUnitEditTxt =findViewById(R.id.PricePerUnitEditTxt);
         TotalValueEditTxt =findViewById(R.id.OTotalValueEditTxt);
         UnitEditTxt =findViewById(R.id.OUnitEditTxt);
-        DescriptionEditTxt =findViewById(R.id.ODescriptionEditTxt);
+        ItemLocationEditText =findViewById(R.id.OItemCodeEditTxt);
         CurrentStockEditTxt =findViewById(R.id.OCurrentStockEditTxt);
         NewStockEditTxt =findViewById(R.id.ONewStockEditTxt);
         OutboundOrderEditTxt =findViewById(R.id.OOutboundOrderEditTxt);
@@ -381,6 +398,7 @@ public class OutboundActivity extends AppCompatActivity {
         TotalValueEditTxt.setText("");
         UnitEditTxt.setText("");
         DescriptionEditTxt.setText("");
+        ItemLocationEditText.setText("");
         CurrentStockEditTxt.setText("");
         NewStockEditTxt.setText("");
         OutboundOrderEditTxt.setText("");
@@ -397,11 +415,43 @@ public class OutboundActivity extends AppCompatActivity {
         TotalValueEditTxt.setError(null);
         UnitEditTxt.setError("");
         DescriptionEditTxt.setError(null);
+        ItemLocationEditText.setError(null);
         CurrentStockEditTxt.setError(null);
         DateButton.setError(null);
         NewStockEditTxt.setError(null);
         OutboundOrderEditTxt.setError(null);
         RemarkMultiEditTxt.setError(null);
+    }
+
+    private class NetworkFetchSpinnerData extends AsyncTask<Void, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(Void... params) {
+            String[] spinnerDataArray = null;
+            try {
+                HTTPSClass httpsClass = new HTTPSClass(OutboundActivity.this);
+                String url = getString(R.string.DepartmentListLink);
+                String DataAsJsonArrayStr = httpsClass.postData(url);
+                spinnerDataArray = Utility.ConvJSONArrayPropToStrArray(DataAsJsonArrayStr,"Name");
+                Log.d("response list", spinnerDataArray.toString());
+            } catch (IOException e) {
+                Log.e("Error", e.toString());
+                ///Toast.makeText(InboundActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+            }
+            return spinnerDataArray;
+        }
+
+        @Override
+        protected void onPostExecute(String[] spinnerData) {
+            if(spinnerData.length!=0)
+            {
+                spinnerData = Utility.InsertStrInStrArrayAtPos(spinnerData,"",0);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(OutboundActivity.this, android.R.layout.simple_spinner_item, spinnerData);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                DeptNameSpinner.setAdapter(adapter);
+            }
+
+        }
     }
 
 }

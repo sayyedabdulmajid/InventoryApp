@@ -98,6 +98,15 @@
         app:layout_constraintTop_toBottomOf="@+id/ONewStockLabel" />
 
     <TextView
+        android:id="@+id/OItemLocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:text="Item Location"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/OOutboundOrderLabel"
+        app:layout_constraintTop_toBottomOf="@+id/OOutboundOrderLabel" />
+    <TextView
         android:id="@+id/OTotalValueLabel"
         android:layout_width="wrap_content"
         android:layout_height="43dp"
@@ -162,6 +171,18 @@
         app:layout_constraintBottom_toBottomOf="@+id/OOutboundOrderLabel"
         app:layout_constraintStart_toStartOf="@+id/OCurrentStockEditTxt"
         app:layout_constraintTop_toTopOf="@+id/OOutboundOrderLabel" />
+    <EditText
+        android:id="@+id/OItemLocationEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:paddingStart="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/OItemLocationLabel"
+        app:layout_constraintStart_toStartOf="@+id/OOutboundOrderEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/OItemLocationLabel" />
     <EditText
         android:id="@+id/ONewStockEditTxt"
         android:layout_width="wrap_content"
@@ -306,8 +327,8 @@
         android:layout_marginTop="25dp"
         android:text="Remarks"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/OOutboundOrderLabel"
-        app:layout_constraintTop_toBottomOf="@+id/OOutboundOrderLabel" />
+        app:layout_constraintStart_toStartOf="@+id/OItemLocationLabel"
+        app:layout_constraintTop_toBottomOf="@+id/OItemLocationLabel" />
 
     <EditText
         android:id="@+id/ORemarkMultiEditTxt"
